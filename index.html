@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <title>Word Search</title>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <meta property='og:url' content='https://www.example.com'>
+        <meta name='description' content='Bla bla...'>
+        <meta name='og:description' content='Bla bla...'>
+
+
+
+        <style>
+            
+            * {
+                font-family: helvetica, sans-serif, serif;
+                text-decoration: none;
+            }
+            
+            .font-bold {
+                font-weight: bold;
+            }
+            
+            .text-center {
+                text-align: center;
+            }
+            
+            p {
+                margin:0;
+            }
+            
+            
+            .search_word_table {
+                border-collapse: collapse;
+                border: 1px solid black;
+                margin:auto;
+            }
+
+            td {
+                border: 1px solid black;
+                padding: 0;
+            }
+
+            .words {
+                padding: 5px 10px;
+                text-transform: capitalize;
+                text-align: center;
+                background-color: white;
+                cursor: pointer;
+            }
+
+            .words:hover {
+                background-color: lightgreen;
+            }
+
+            .word_search_table_wrapper {
+                display: inline-block;
+                box-shadow: 0px 0px 5px lightgray;
+                width: 100%;
+                overflow: auto;
+            }
+
+            .word_given_input {
+                display: inline-block;
+                margin-bottom: 3px;
+                font-size: 18px;
+                padding: 10px;
+            }
+
+
+            .add_word_btn {
+                display: inline-block;
+                color: white;
+                padding: 5px;
+                font-size: 18px;
+                cursor: pointer;
+            }
+
+            .add_word_btn,
+            .add-predefined-words-btn {
+                background-color: #00bf00;
+                border: none;
+                border-radius: 5px;
+            }
+
+            .selected_words_btns {
+                display: inline-block;
+                background-color: #0099ff;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+                padding: 5px;
+                margin: 5px;
+                cursor: pointer;
+            }
+
+            .selected_words_btns:active {
+                filter: brightness(150%);
+            }
+
+            .words-choose-wrapper {
+                width: 300px;
+                margin: auto;
+                padding: 10px;
+                background-color: #3272a8;
+                color: white;
+                text-align: center;
+                border-radius: 5px;
+            }
+
+            .predefined-words-select {
+                border: none;
+                padding: 10px;
+                font-size: 18px;
+                margin:auto;
+            }
+
+            .add-predefined-words-btn {
+                padding: 10px;
+                font-size: 18px;
+                cursor: pointer;
+                color: white;
+                margin: 10px;
+            }
+            
+            .css-js-right-letter-clicked {
+                background-color: lime !important;
+                color:black;
+                font-weight: bold;
+                border-color:lime;
+            }
+            
+            .generate-puzzle-btn {
+                display: block;
+                background-color: #305f9f;
+                padding: 10px;
+                font-size: 16px;
+                color: white;
+                border-radius: 5px;
+                cursor: pointer;
+                border:none;
+                margin: 5px auto;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <br>
+        <br>
+        <br>
+
+        <p class="h1-font font-bold text-center">Word Search</p>
+        <p class="h4-font text-center">Find the hidden words !</p>
+
+        <br>
+        <br>
+
+
+        <div class="words-choose-wrapper">
+            <form>
+                <p style='font-size:18px; padding-bottom: 5px; font-weight:bold'>Write a word and find it!</p>
+                <input type="text" class="js-given_word word_given_input">
+                <button class="add_word_btn js-add_this_word_btn">Add</button>
+            </form>
+            <p style="font-weight:bold; margin: 10px">Or</p>
+
+            <form autocomplete="off">
+                <p style='font-size:18px; padding-bottom: 5px; font-weight:bold'>Use predefined words:</p>
+                <p>
+                    Words # 
+                    <select class="predefined-words-select" id='js-choose-predefined-words-number'>
+                        <option value='' selected>---</option>
+                        <option value='10'>10</option>
+                        <option value='20'>20</option>
+                        <option value='30'>30</option>
+                        <option value='40'>40</option>
+                        <option value='50'>50</option>
+                        <option value='60'>60</option>
+                        <option value='70'>70</option>
+                    </select>
+                </p>
+
+                <button class="add-predefined-words-btn" id='js-predefined-words-btn'>Generate</button>
+            </form>
+        </div>
+
+
+        <br>
+        <div class="text-center js-word-selected-display-wrapper"></div>
+        <br>
+
+        <button class="js-random_word_search_btn generate-puzzle-btn">Generate Random Puzzle</button>
+        <p class="h6-font text-center">Highlight All Words <input type="checkbox" class="js-highlight_all_words_btn">
+        </p>
+        <br>
+
+
+
+        <div class="text-center">
+            <div class="word_search_table_wrapper responsive-width-500px" id='js-game-board-loader'></div>
+        </div>
+
+        <br>
+        <br>
+    </body>
+
+</html>
+<script src='/LaloGarcia_Libraries/js/CreateDynamicHTML/CreateDynamicHTML.js'></script>
+
+<!--------------->
+
+<script src='/LaloGarcia_Libraries/js/Word-search-game/js/General.js'></script>
+<script src='/LaloGarcia_Libraries/js/Word-search-game/js/TestingWordsList.js'></script>
+<script src='/LaloGarcia_Libraries/js/Word-search-game/js/ChooseWordsToHide.js'></script>
+<script src='/LaloGarcia_Libraries/js/Word-search-game/js/WordSearch.js'></script>
+<script src='/LaloGarcia_Libraries/js/Word-search-game/js/Events_WordSearch.js'></script>
+<script src='/LaloGarcia_Libraries/js/Word-search-game/js/WhenAWordIsFound.js'></script>
+
+
